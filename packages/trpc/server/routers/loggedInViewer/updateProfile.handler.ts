@@ -422,6 +422,7 @@ export const updateProfileHandler = async ({ ctx, input }: UpdateProfileOptions)
     avatarUrl: updatedUser.avatarUrl,
     hasEmailBeenChanged,
     sendEmailVerification: emailVerification && !secondaryEmail?.emailVerified,
+    redirectsTo: userMetadata.sourceSignup === "team" && "/settings/teams/new",
   };
 };
 

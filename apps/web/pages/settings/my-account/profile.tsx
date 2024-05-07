@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 // eslint-disable-next-line no-restricted-imports
 import { get, pick } from "lodash";
 import { signOut, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import type { BaseSyntheticEvent } from "react";
 import React, { useRef, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
@@ -107,6 +108,10 @@ const ProfileView = () => {
         showToast(t("change_of_email_toast", { email: tempFormValues?.email }), "success");
       } else {
         showToast(t("settings_updated_successfully"), "success");
+      }
+
+      if (res.redirectsTo) {
+        redirect(res.redirectsTo);
       }
 
       setTempFormValues(null);
